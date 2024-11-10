@@ -38,9 +38,9 @@ prometheus_metrics:
 
 # Rollback Test
 rollback_test:
-  previous_revision: 6
-  rollback_command_used: helm rollback canary-demo 7 -n canary-demo
-  time_to_rollback_seconds: 390ms
+  previous_revision: 1
+  rollback_command_used: helm rollback canary-demo 1 -n canary-demo
+  time_to_rollback_seconds: 176ms
 
 # Error Budget Calculation (based on 99.9% SLO)
 error_budget:
@@ -50,5 +50,5 @@ error_budget:
 # Additional Observations
 observations:
   unexpected_behaviors: - When I changed the values.yml file, the upgrades wouldn't get deployed by helm. I had to push my changes to github to be able to get helm to deploy the changes. This is why my version counter was higher than expected.
-                        - When I deployed and rolled back my changes I had to reconfigure port 8081 each time to get the canary deployment online with the command "kubectl port-forward svc/canary-demo-canary 8081:80 -n canary-demo"
+                        - When I deployed and rolled back my changes I had to reconfigure port 8081 each time to get the canary deployment online with the command "kubectl port-forward svc/canary-demo-canary 8081:80 -n canary-demo &"
   suggested_improvements: #TODO: List any improvements you would suggest
