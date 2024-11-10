@@ -10,8 +10,8 @@ service_endpoints:
 
 # Ingress Information
 ingress_details:
-  address: 
-  host: #TODO: Enter the configured host (should be canary-demo.local)
+  address: 192.168.49.2
+  host: canary-demo.local
 
 # Metrics
 main_deployment_metrics:
@@ -33,8 +33,8 @@ traffic_test_results:
 
 # Prometheus Queries
 prometheus_metrics:
-  main_request_rate: #TODO: Enter the result of rate(http_requests_total{version="v1"}[5m])
-  canary_request_rate: #TODO: Enter the result of rate(http_requests_total{version="v2"}[5m])
+  main_request_rate: After a lot of troubleshooting I couldn't get http_requests_total to work on prometheus and graphana. I would only get other stats.
+  canary_request_rate: 
 
 # Rollback Test
 rollback_test:
@@ -51,4 +51,5 @@ error_budget:
 observations:
   unexpected_behaviors: - When I changed the values.yml file, the upgrades wouldn't get deployed by helm. I had to push my changes to github to be able to get helm to deploy the changes. This is why my version counter was higher than expected.
                         - When I deployed and rolled back my changes I had to reconfigure port 8081 each time to get the canary deployment online with the command "kubectl port-forward svc/canary-demo-canary 8081:80 -n canary-demo &"
+                        - http_requests_total wasn't an available metric in graphana/prometheus for me. I tried to play around with settings to get this to work, or use an alternative metric but I couldn't find any way to resolve the issue.
   suggested_improvements: #TODO: List any improvements you would suggest
